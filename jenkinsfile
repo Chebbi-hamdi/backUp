@@ -1,0 +1,21 @@
+pipline{
+    agent any
+    stages{
+       
+        stage('Test'){
+            steps{
+                sh 'npm install'
+                sh 'npm test'
+                echo 'Testing the project'
+            }
+        }
+         stage('Build'){
+            steps{
+                sh 'npm run build'
+                echo 'Building the project'
+            }
+        }
+       
+    }
+}
+
