@@ -1,21 +1,29 @@
-pipline{
+pipeline {
     agent any
-    stages{
-       
-        stage('Test'){
-            steps{
-                sh 'npm install'
-                sh 'npm test'
-                echo 'Testing the project'
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/Chebbi-hamdi/backUp.git', branch: 'main'
             }
         }
-         stage('Build'){
-            steps{
-                sh 'npm run build'
-                echo 'Building the project'
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                // Add build steps here
             }
         }
-       
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                // Add test steps here
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+                // Add deploy steps here
+            }
+        }
     }
 }
-
