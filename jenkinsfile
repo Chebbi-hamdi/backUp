@@ -28,7 +28,6 @@
 //     }
 // }
 /** working with stages */
-
 pipeline {
     agent any
 
@@ -45,10 +44,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                // Add build steps here
                 script {
                     // Build the Docker image using the Dockerfile in the repository root
-                    docker.build DOCKER_IMAGE, '-f Dockerfile .'
+                    bat 'docker build -t node:18.15.0 -f Dockerfile .'
                 }
             }
         }
@@ -64,11 +62,7 @@ pipeline {
                 // Add deploy steps here
                 script {
                     // Run the Docker container
-                    docker.image(DOCKER_IMAGE).inside('-p 5000:5000') {
-                        sh 'npm install --force' // Install dependencies
-                        // Other necessary commands
-                        sh 'node app.js' // Start the application
-                    }
+                    bat 'docker run -d -p 5000:5000 node:18.15.0'
                 }
             }
         }
@@ -78,10 +72,7 @@ pipeline {
         always {
             script {
                 // Clean up Docker container after build
-                docker.image(DOCKER_IMAGE).inside {
-                    sh 'docker stop my-app-container' // Stop the Docker container
-                    sh 'docker rm my-app-container' // Remove the Docker container
-                }
+                bat 'docker stop $(docker ps -q --filter ancestor=node:18.15.0)'
             }
         }
         success {
