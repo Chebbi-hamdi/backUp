@@ -1,16 +1,55 @@
+// pipeline {
+//     agent any
+
+//     stages {
+//         stage('Checkout') {
+//             steps {
+//                 git url: 'https://github.com/Chebbi-hamdi/backUp.git', branch: 'main'
+//             }
+//         }
+//         stage('Build') {
+//             steps {
+//                 echo 'Building...'
+//                 // Add build steps here
+//             }
+//         }
+//         stage('Test') {
+//             steps {
+//                 echo 'Testing...'
+//                 // Add test steps here
+//             }
+//         }
+//         stage('Deploy') {
+//             steps {
+//                 echo 'Deploying...'
+//                 // Add deploy steps here
+//             }
+//         }
+//     }
+// }
+/** working with stages */
+
 pipeline {
     agent any
+
+    environment {
+        DOCKER_IMAGE = 'node:18.15.0' // Define the Docker image to use
+    }
 
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/Chebbi-hamdi/backUp.git', branch: 'main'
+                git url: 'https://github.com/Chebbi-hamdi/backUp.git', branch: 'main' // Checkout the code from the repository
             }
         }
         stage('Build') {
             steps {
                 echo 'Building...'
                 // Add build steps here
+                script {
+                    // Build the Docker image using the Dockerfile in the repository root
+                    docker.build DOCKER_IMAGE, '-f Dockerfile .'
+                }
             }
         }
         stage('Test') {
@@ -23,7 +62,33 @@ pipeline {
             steps {
                 echo 'Deploying...'
                 // Add deploy steps here
+                script {
+                    // Run the Docker container
+                    docker.image(DOCKER_IMAGE).inside('-p 5000:5000') {
+                        sh 'npm install --force' // Install dependencies
+                        // Other necessary commands
+                        sh 'node app.js' // Start the application
+                    }
+                }
             }
+        }
+    }
+
+    post {
+        always {
+            script {
+                // Clean up Docker container after build
+                docker.image(DOCKER_IMAGE).inside {
+                    sh 'docker stop my-app-container' // Stop the Docker container
+                    sh 'docker rm my-app-container' // Remove the Docker container
+                }
+            }
+        }
+        success {
+            echo 'Build succeeded!'
+        }
+        failure {
+            echo 'Build failed!'
         }
     }
 }

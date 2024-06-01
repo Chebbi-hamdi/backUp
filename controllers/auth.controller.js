@@ -24,7 +24,7 @@ const signUp = async (req, res) => {
     const geo = geoip.lookup(userInfo.ip);
     if (
       !(
-        userInfo &&
+        // userInfo &&
         userInfo.password &&
         userInfo.email.primary &&
         userInfo.name &&
@@ -44,11 +44,11 @@ const signUp = async (req, res) => {
     const hash = await bcrypt.hash(userInfo.password, 10);
 
     userInfo.password = hash;
-    userInfo.authType = "local";
+    // userInfo.authType = "local";
 
     userInfo.email.primary = userInfo.email.primary.toLowerCase();
-    userInfo.status = "unverified";
-    userInfo.address = getName(geo.country);
+    // userInfo.status = "unverified";
+    // userInfo.address = getName(geo.country);
 
     let user = await User.create(userInfo);
 

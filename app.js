@@ -51,6 +51,10 @@ mongoose
 app.use(function (req, res, next) {
   next(createError(404));
 });
+//connection to seerver
+app.listen(5000, () => {
+  console.log("Server running on port 3000");
+});  
 
 app.use(function (err, req, res, next) {
   res.locals.message = err.message;
