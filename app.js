@@ -5,7 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const mongoose = require("mongoose");
 require("dotenv").config();
-const passport = require("./middlewares/passport");
+// const passport = require("./middlewares/passport");
 const session = require("express-session");
 
 var indexRouter = require("./routes/index");
@@ -34,8 +34,8 @@ app.use(
 );
 
 // Initialize Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);

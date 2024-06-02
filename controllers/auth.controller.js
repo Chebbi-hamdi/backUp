@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 const createError = require("http-errors");
 const User = require("../models/user");
 const { getName } = require("country-list");
-const passport = require("../middlewares/passport");
+// const passport = require("../middlewares/passport");
 
 /**
  * Handles user registration.
@@ -105,16 +105,16 @@ const login = async (req, res) => {
  * Initiates Google login.
  */
 
-const googleLogin = passport.authenticate("google", {
-  scope: ["profile", "email"],
-});
-/**
- * Callback for Google login.
- */
+// const googleLogin = passport.authenticate("google", {
+//   scope: ["profile", "email"],
+// });
+// /**
+//  * Callback for Google login.
+//  */
 
-const googleCallback = passport.authenticate("google", {
-  failureRedirect: "/login",
-});
+// const googleCallback = passport.authenticate("google", {
+//   failureRedirect: "/login",
+// });
 /**
  * Handles successful Google login.
  *
@@ -130,15 +130,16 @@ const handleGoogleSuccess = (req, res) => {
  * Initiates Facebook login.
  */
 
-const facebookLogin = passport.authenticate("facebook", { scope: ["email"] });
+// const facebookLogin = passport.authenticate("facebook", { scope: ["email"] });
 /**
  * Callback for Facebook login.
  */
 
-const facebookCallback = passport.authenticate("facebook", {
-  failureRedirect: "/login",
-});
-/**
+// const facebookCallback = passport.authenticate("facebook", {
+//   failureRedirect: "/login",
+// });
+// /**
+/*
  * Handles successful Facebook login.
  *
  * @param {Object} req - The request object containing user information.
