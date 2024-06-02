@@ -3,8 +3,8 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-const mongoose = require("mongoose");
 require("dotenv").config();
+const mongoose = require("mongoose");
 // const passport = require("./middlewares/passport");
 const session = require("express-session");
 
@@ -22,8 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-const DB_URL = process.env.DB_URL_DEV;
-
+const DB_URL = process.env.DB_URL || 'mongodb+srv://shampo:2FzVNx7KGrXNYMpk@cluster0.hbkxlkm.mongodb.net/bendaamar?retryWrites=true&w=majority';
 // Configure express-session middleware
 app.use(
   session({
