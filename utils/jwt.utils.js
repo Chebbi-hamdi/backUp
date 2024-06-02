@@ -1,5 +1,8 @@
 const jwt = require('jsonwebtoken')
 
+const JWT_TOKEN_SECRET='LsqSp6YQZD0i7qnDyagjPWjlNTYuDofvU9zKse3n2XGzo1ty6iR3zWOy4SKbn/G2To2u8lWpVyoDcQDEGFhxtw=='
+const JWT_ACTIVATE_ACCOUNT='e3n2XGzo1ty6iR3zWOy4SKbn/G2To2VyoDcQDEGFhxtw=='
+
 const generateJWT = (user) => {
 	return jwt.sign(
 		{
@@ -7,9 +10,9 @@ const generateJWT = (user) => {
 			username: user.username || 'username',
 			email: user.email.primary || user.email_gerant,
 		},
-		process.env.JWT_TOKEN_SECRET,
+		JWT_TOKEN_SECRET,
 		{
-			expiresIn: process.env.JWT_TOKEN_DURATION
+			expiresIn: "7d"
 		}
 	)
 }
@@ -45,8 +48,8 @@ const verifyRecoveryJWT = (token) => {
 const enableAccJWT = (user) => {
 	return jwt.sign(
 		{name: user.email.primary},
-		process.env.JWT_ACTIVATE_ACCOUNT,
-		{expiresIn: process.env.JWT_ACTIVATE_ACCOUNT_DURATION}
+        JWT_ACTIVATE_ACCOUNT,
+		{expiresIn: '1d'}
 	)
 }
 

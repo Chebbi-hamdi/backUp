@@ -1,4 +1,4 @@
-const { generateJWT } = require("../utils/jwt.utils");
+const { generateJWT,enableAccJWT } = require("../utils/jwt.utils");
 const asyncHandler = require("express-async-handler");
 const requestIp = require("request-ip");
 const geoip = require("geoip-lite");
@@ -54,7 +54,7 @@ const signUp = async (req, res) => {
 
     // Send mail to verify account
 
-    const token = jwt.enableAccJWT(userInfo);
+    const token = enableAccJWT(userInfo);
 
     res.status(200).json({ token });
   } catch (error) {
