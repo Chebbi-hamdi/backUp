@@ -1,6 +1,6 @@
 var createError = require("http-errors");
-require("dotenv").config();
 var express = require("express");
+require("dotenv").config();
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
@@ -26,7 +26,7 @@ const DB_URL = process.env.DB_URL || 'mongodb+srv://shampo:2FzVNx7KGrXNYMpk@clus
 // Configure express-session middleware
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    secret: "secret",
     resave: false,
     saveUninitialized: false,
   })
