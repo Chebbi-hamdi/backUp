@@ -122,10 +122,10 @@ const login = async (req, res) => {
  * @param {Object} res - The response object for sending HTTP responses.
  */
 
-const handleGoogleSuccess = (req, res) => {
-  const token = generateJWT(req.user);
-  res.status(200).json({ token });
-};
+// const handleGoogleSuccess = (req, res) => {
+//   const token = generateJWT(req.user);
+//   res.status(200).json({ token });
+// };
 /**
  * Initiates Facebook login.
  */
@@ -154,10 +154,10 @@ const handleFacebookSuccess = (req, res) => {
 module.exports = {
   signUp,
   login,
-  googleLogin,
-  googleCallback,
-  handleGoogleSuccess,
-  facebookLogin,
-  facebookCallback,
-  handleFacebookSuccess,
+  // googleLogin,
+  // googleCallback,
+  // handleGoogleSuccess,
+  // facebookLogin,
+  // facebookCallback,
+  // handleFacebookSuccess,
 };

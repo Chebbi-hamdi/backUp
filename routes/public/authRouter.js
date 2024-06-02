@@ -6,10 +6,10 @@ const authRouter = express.Router()
 
 authRouter.post('/register', authController.signUp);
 authRouter.post('/login', authController.login);
-authRouter.get('/google', authController.googleLogin);
-authRouter.get('/google/callback', authController.googleCallback, authController.handleGoogleSuccess);
-authRouter.get('/facebook', authController.facebookLogin); 
-authRouter.get('/facebook/callback', authController.facebookCallback, authController.handleFacebookSuccess); 
+// authRouter.get('/google', authController.googleLogin);
+// authRouter.get('/google/callback', authController.googleCallback, authController.handleGoogleSuccess);
+// authRouter.get('/facebook', authController.facebookLogin); 
+// authRouter.get('/facebook/callback', authController.facebookCallback, authController.handleFacebookSuccess); 
 
 
 module.exports = authRouter
