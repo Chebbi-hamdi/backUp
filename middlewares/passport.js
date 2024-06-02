@@ -13,9 +13,8 @@ const jwt = require("jsonwebtoken");
 passport.use(
   new GoogleStrategy(
     {
-      clientID:
-        "277304945553-fdslunliksd0mf9rct405qp7nn6jmsi4.apps.googleusercontent.com",
-      clientSecret: "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",
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret:  process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "http://localhost:3000/api/v0/auth/google/callback",
       scope: [
         "profile",
